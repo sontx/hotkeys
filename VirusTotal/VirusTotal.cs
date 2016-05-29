@@ -261,6 +261,17 @@ namespace VirusTotal
             return ScanUrls(uris);
         }
 
+        private string[] ToStrings(IEnumerable<Uri> urls)
+        {
+            string[] _urls = new string[urls.Count()];
+            int index = 0;
+            foreach (Uri uri in urls)
+            {
+                _urls[index++] = uri.ToString();
+            }
+            return _urls;
+        }
+
         /// <summary>
         /// Scan the given URLs. The URLs will be downloaded by VirusTotal and processed.
         /// Note: Before performing your submission, you should retrieve the latest reports on the URLs.
@@ -279,7 +290,8 @@ namespace VirusTotal
 
             //Required
             request.AddParameter("apikey", _apiKey);
-            request.AddParameter("url", string.Join(",", urls));
+            
+            request.AddParameter("url", string.Join(",", ToStrings(urls)));
 
             //Output
             return GetResults<List<ScanResult>>(request);
@@ -332,10 +344,15 @@ namespace VirusTotal
 
             //Required
             request.AddParameter("apikey", _apiKey);
-            request.AddParameter("resource", string.Join(",", urls));
+            request.AddParameter("resource", string.Join(",", ToStrings(urls)));
 
             //Output
             return GetResults<List<Report>>(request, true);
+        }
+
+        private bool IsNullOrWhiteSpace(string st)
+        {
+            return string.IsNullOrEmpty(st) || st.Trim().Length == 0;
         }
 
         /// <summary>
@@ -348,7 +365,7 @@ namespace VirusTotal
         {
             ValidateResource(resource);
 
-            if (string.IsNullOrWhiteSpace(comment))
+            if (IsNullOrWhiteSpace(comment))
                 throw new ArgumentException("Comment must not be null or whitespace", "comment");
 
             //https://www.virustotal.com/vtapi/v2/comments/put
@@ -408,7 +425,7 @@ namespace VirusTotal
             if (response.StatusCode != HttpStatusCode.OK)
                 throw new Exception("API gave error code " + response.StatusCode);
 
-            if (string.IsNullOrWhiteSpace(response.Content))
+            if (IsNullOrWhiteSpace(response.Content))
                 throw new Exception("There were no content in the response.");
 
             if (applyHack)
@@ -482,7 +499,7 @@ namespace VirusTotal
 
         private void ValidateResource(string resource)
         {
-            if (string.IsNullOrWhiteSpace(resource))
+            if (IsNullOrWhiteSpace(resource))
                 throw new ArgumentException("Resource must not be null or whitespace", "resource");
 
             if (resource.Length != 32 && resource.Length != 40 && resource.Length != 64)

@@ -55,6 +55,11 @@ namespace HotKeys
             WinAPI.WritePrivateProfileString(section, key, value, path);
         }
 
+        private bool IsNullOrWhiteSpace(string st)
+        {
+            return string.IsNullOrEmpty(st) || st.Trim().Length == 0;
+        }
+
         /// <summary>
         /// Nhập cấu nội dung file ini với cấu trúc đã đc định nghĩa vào list
         /// </summary>
@@ -67,7 +72,7 @@ namespace HotKeys
             for (int i = 1; i <= MAX_MEMBERS; i++)
             {
                 s = ReadINI(SEC_APPLICATION + i.ToString(), KEY_NAME);
-                if (!string.IsNullOrWhiteSpace(s))//la 1 app
+                if (!IsNullOrWhiteSpace(s))//la 1 app
                 {
                     app = new App();
                     app.Name = s;
@@ -75,7 +80,7 @@ namespace HotKeys
                     sections.Add(app);
                 }
                 s = ReadINI(SEC_APPSGROUP + i.ToString(), KEY_NAME);
-                if (!string.IsNullOrWhiteSpace(s))//la 1 appsgroup
+                if (!IsNullOrWhiteSpace(s))//la 1 appsgroup
                 {
                     apps = new AppsGroup();
                     apps.Name = s;
@@ -83,7 +88,7 @@ namespace HotKeys
                     for (int j = 1; j <= MAX_MEMBERS; j++)//import cac apps trong 1 group
                     {
                         s = ReadINI(SEC_APPSGROUP + i.ToString(), KEY_NAME + j.ToString());
-                        if (!string.IsNullOrWhiteSpace(s))//la 1 app
+                        if (!IsNullOrWhiteSpace(s))//la 1 app
                         {
                             app = new App();
                             app.Name = s;
