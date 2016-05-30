@@ -250,7 +250,7 @@ namespace HotKeys
             using (OpenFileDialog dlg = new OpenFileDialog())
             {
                 dlg.Title = "Select any file!";
-                dlg.Filter = "*.exe|Execute file|*.*|All files";
+                dlg.Filter = "Executable files|*.exe|All files|*.*";
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
                     OpenFile(dlg.FileName);
