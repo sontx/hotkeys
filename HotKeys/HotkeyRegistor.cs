@@ -40,6 +40,8 @@ namespace HotKeys
             WinAPI.RegisterHotKey(h, (int)KEY_RESTART_SYSTEM.ID, mod, (uint)KEY_RESTART_SYSTEM.KEY);
             //killer
             WinAPI.RegisterHotKey(h, (int)KEY_KILLER.ID, mod, (uint)KEY_KILLER.KEY);
+            //boss
+            WinAPI.RegisterHotKey(h, (int)KEY_BOSS.ID, mod, (uint)KEY_BOSS.KEY);
             //tools
             bool r= WinAPI.RegisterHotKey(h, (int)KEY_TOOLS.ID, mod, (uint)KEY_TOOLS.KEY);
         }
@@ -63,6 +65,7 @@ namespace HotKeys
             WinAPI.UnregisterHotKey(h, (int)KEY_LOG_OFF.ID);
             WinAPI.UnregisterHotKey(h, (int)KEY_RESTART_SYSTEM.ID);
             WinAPI.UnregisterHotKey(h, (int)KEY_KILLER.ID);
+            WinAPI.UnregisterHotKey(h, (int)KEY_BOSS.ID);
             WinAPI.UnregisterHotKey(h, (int)KEY_TOOLS.ID);
         }
     }

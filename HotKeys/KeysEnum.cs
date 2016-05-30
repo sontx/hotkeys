@@ -128,13 +128,19 @@ namespace HotKeys
 
     internal enum KEY_KILLER : uint
     {
-        KEY = KEYS_ENUM.F7,
+        KEY = Keys.K,
         ID = 0x10
+    }
+
+    internal enum KEY_BOSS : uint
+    {
+        KEY = Keys.B,
+        ID = 0x11
     }
 
     internal enum KEY_TOOLS : uint
     {
         KEY = Keys.X,
-        ID = 0x11
+        ID = 0x12
     }
 }

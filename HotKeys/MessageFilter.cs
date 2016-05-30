@@ -75,6 +75,10 @@ namespace HotKeys
                     Tasks.Killer();
                     break;
 
+                case (int)KEY_BOSS.ID:
+                    Tasks.Boss();
+                    break;
+
                 case (int)KEY_TOOLS.ID:
                     Tasks.Tools();
                     break;

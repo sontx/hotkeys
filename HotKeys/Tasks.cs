@@ -182,30 +182,31 @@ namespace HotKeys
             string s = null;
             string sp = "....................................................." + Environment.NewLine;
 
-            s += "Modifier keys: Ctrl + Alt" + Environment.NewLine;
-            s += (Keys)KEY_HELP.KEY + " to show help" + Environment.NewLine;
-            s += (Keys)KEY_SETTINGS.KEY + " to show settings" + Environment.NewLine;
-            s += (Keys)KEY_EXIT.KEY + " to exit this program" + Environment.NewLine;
+            s += "Modifier Keys: CTRL + ALT" + Environment.NewLine;
+            s += (Keys)KEY_HELP.KEY + " \t Show Help" + Environment.NewLine;
+            s += (Keys)KEY_SETTINGS.KEY + " \t Show Settings" + Environment.NewLine;
+            s += ((Keys)KEY_EXIT.KEY).ToString().ToUpper() + " \t Exit Program" + Environment.NewLine;
             s += sp;
-            s += "Media hotkeys." + Environment.NewLine;
+            s += "Media Hotkeys." + Environment.NewLine;
             s += sp;
-            s += (Keys)MEDIA_KEYNEXT.KEY + " to next" + Environment.NewLine;
-            s += (Keys)MEDIA_KEYBACK.KEY + " to back" + Environment.NewLine;
-            s += (Keys)MEDIA_KEYPAUSE.KEY + " to pause" + Environment.NewLine;
-            s += (Keys)MEDIA_KEYSTOP.KEY + " to stop" + Environment.NewLine;
-            s += (Keys)MEDIA_KEYVOLUMEUP.KEY + " to increase the volume" + Environment.NewLine;
-            s += (Keys)MEDIA_KEYVOLUMEDOWN.KEY + " to decrease the volume" + Environment.NewLine;
-            s += (Keys)MEDIA_KEYVOLUMEMUTE.KEY + " to muting" + Environment.NewLine;
+            s += ((Keys)MEDIA_KEYNEXT.KEY).ToString().ToUpper() + " \t Next" + Environment.NewLine;
+            s += ((Keys)MEDIA_KEYBACK.KEY).ToString().ToUpper() + " \t Back" + Environment.NewLine;
+            s += ((Keys)MEDIA_KEYPAUSE.KEY).ToString().ToUpper() + " \t Pause" + Environment.NewLine;
+            s += ((Keys)MEDIA_KEYSTOP.KEY).ToString().ToUpper() + " \t Stop" + Environment.NewLine;
+            s += ((Keys)MEDIA_KEYVOLUMEUP.KEY).ToString().ToUpper() + " \t Increase The Volume" + Environment.NewLine;
+            s += ((Keys)MEDIA_KEYVOLUMEDOWN.KEY).ToString().ToUpper() + " \t Decrease The Volume" + Environment.NewLine;
+            s += ((Keys)MEDIA_KEYVOLUMEMUTE.KEY).ToString().ToUpper() + " \t Muting" + Environment.NewLine;
             s += sp;
-            s += "System hotkeys." + Environment.NewLine;
+            s += "System Hotkeys." + Environment.NewLine;
             s += sp;
-            s += (Keys)KEY_RESTART_EXPLORER.KEY + " to restart explorer" + Environment.NewLine;
-            s += (Keys)KEY_OPEN_TASKMGR.KEY + " to open taskmgr" + Environment.NewLine;
-            s += (Keys)KEY_OPEN_FILE.KEY + " to open file" + Environment.NewLine;
-            s += (Keys)KEY_LOG_OFF.KEY + " to logoff" + Environment.NewLine;
-            s += (Keys)KEY_RESTART_SYSTEM.KEY + " to restart system" + Environment.NewLine;
-            s += (Keys)KEY_KILLER.KEY + " to show killer" + Environment.NewLine;
-            s += (Keys)KEY_TOOLS.KEY + " to show tools" + Environment.NewLine;
+            s += (Keys)KEY_RESTART_EXPLORER.KEY + " \t Restart explorer" + Environment.NewLine;
+            s += (Keys)KEY_OPEN_TASKMGR.KEY + " \t Open Task Manager" + Environment.NewLine;
+            s += (Keys)KEY_OPEN_FILE.KEY + " \t Open Any File" + Environment.NewLine;
+            s += (Keys)KEY_LOG_OFF.KEY + " \t Logoff System" + Environment.NewLine;
+            s += (Keys)KEY_RESTART_SYSTEM.KEY + " \t Restart System" + Environment.NewLine;
+            s += (Keys)KEY_KILLER.KEY + " \t Show Killer" + Environment.NewLine;
+            s += (Keys)KEY_BOSS.KEY + " \t Show Boss" + Environment.NewLine;
+            s += (Keys)KEY_TOOLS.KEY + " \t Show Tools Menu" + Environment.NewLine;
             s += sp;
             s += "Author: Gin.";
             MessageBox.Show(s, Application.ProductName + " - Help"
@@ -282,6 +283,16 @@ namespace HotKeys
         public static void Killer()
         {
             using (Forms.frmKiller f = new Forms.frmKiller())
+            {
+                f.ShowDialog();
+                f.Dispose();
+                GC.Collect();
+            }
+        }
+
+        public static void Boss()
+        {
+            using (Forms.frmBoss f = new Forms.frmBoss())
             {
                 f.ShowDialog();
                 f.Dispose();
