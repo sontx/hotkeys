@@ -38,7 +38,8 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>hotkeys_icon.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -115,9 +116,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icon.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="hotkeys_icon.ico" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VirusTotal\VirusTotal.csproj">
