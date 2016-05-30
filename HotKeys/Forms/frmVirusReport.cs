@@ -4,7 +4,7 @@ using VirusTotal.Objects;
 
 namespace HotKeys.Forms
 {
-    public partial class frmVirusReport : Form
+    public partial class frmVirusReport : BaseForm
     {
         public frmVirusReport(Report fileReport)
         {

@@ -7,7 +7,7 @@ using VirusTotal.Objects;
 using System.Text;
 namespace HotKeys.Forms
 {
-    public partial class frmKiller : Form
+    public partial class frmKiller : BaseForm
     {
         private Process[] pros;
         private byte[] GetAPIKey()

@@ -2,7 +2,7 @@
 
 namespace HotKeys.Forms
 {
-    public partial class frmSettings : Form
+    public partial class frmSettings : BaseForm
     {
         public frmSettings()
         {
