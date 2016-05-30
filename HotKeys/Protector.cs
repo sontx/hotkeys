@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace HotKeys
 {
-    internal sealed class Protector
+    internal static class Protector
     {
         private const string HK_RUN = "Software\\Microsoft\\Windows\\CurrentVersion\\Run";
 
@@ -16,7 +16,7 @@ namespace HotKeys
             RegistryKey key = null;
             try
             {
-                key = Registry.CurrentUser.OpenSubKey(HK_RUN,true);
+                key = Registry.CurrentUser.OpenSubKey(HK_RUN, true);
                 key.SetValue(Application.ProductName, Application.ExecutablePath, RegistryValueKind.String);
                 key.Close();
                 key = null;
@@ -34,7 +34,7 @@ namespace HotKeys
             RegistryKey key = null;
             try
             {
-                key = Registry.CurrentUser.OpenSubKey(HK_RUN,true);
+                key = Registry.CurrentUser.OpenSubKey(HK_RUN, true);
                 key.DeleteValue(Application.ProductName);
                 key.Close();
                 key = null;

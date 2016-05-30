@@ -1,7 +1,7 @@
 ﻿using System;
 namespace HotKeys
 {
-    internal sealed class HotkeyRegistor
+    internal static class HotkeyRegistor
     {
         public static void Register()
         {

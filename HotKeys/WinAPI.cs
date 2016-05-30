@@ -194,7 +194,7 @@ namespace HotKeys
         internal int Bottom;
     }
 
-    internal sealed class WinAPI
+    internal static class WinAPI
     {
         [DllImport("user32.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]

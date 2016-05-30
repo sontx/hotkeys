@@ -4,13 +4,12 @@ using System.Windows.Forms;
 
 namespace HotKeys
 {
-    internal sealed class Tasks
+    internal static class Tasks
     {
-        private TaskBar icon = null;
-        private ToolsList tools;
-        public static Tasks _tasks = new Tasks();
+        private static TaskBar icon = null;
+        private static ToolsList tools;
 
-        public Tasks()
+        static Tasks()
         {
             tools = new ToolsList(Properties.Settings.Default["ConfigINI"].ToString());
         }
@@ -31,8 +30,10 @@ namespace HotKeys
                 try
                 {
                     p.CloseMainWindow();
+                    p.WaitForExit(5000);
                     if (p.HasExited) continue;
                     p.Close();
+                    p.WaitForExit(5000);
                     if (p.HasExited) continue;
                     p.Kill();
                 }
@@ -58,23 +59,23 @@ namespace HotKeys
             else
                 Protector.RemAutoStartup();
             if ((bool)Properties.Settings.Default["ShowInTaskbar"])
-                _tasks.ShowInTaskbar();
+                ShowInTaskbar();
             else
-                _tasks.HideInTaskbar();
+                HideInTaskbar();
         }
 
-        public void ShowTools()
+        public static void ShowTools()
         {
             tools.Show();
         }
 
-        public void ShowInTaskbar()
+        public static void ShowInTaskbar()
         {
             if (icon != null) return;
             icon = new TaskBar();
         }
 
-        public void HideInTaskbar()
+        public static void HideInTaskbar()
         {
             if (icon == null) return;
             icon.Dispose();
@@ -227,7 +228,7 @@ namespace HotKeys
         public static void Exit()
         {
             HotkeyRegistor.Unregister();
-            Tasks._tasks.HideInTaskbar();
+            HideInTaskbar();
             Application.ExitThread();
         }
 
@@ -290,7 +291,7 @@ namespace HotKeys
 
         public static void Tools()
         {
-            Tasks._tasks.ShowTools();
+            ShowTools();
         }
     }
 }

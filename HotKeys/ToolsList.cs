@@ -103,34 +103,36 @@ namespace HotKeys
 
         public ToolsListImporter(string path)
         {
-            this.path =Path.GetFullPath(path);
+            this.path = Path.GetFullPath(path);
         }
     }
 
-    internal class ToolsList:ToolsListImporter,IDisposable
+    internal class ToolsList : ToolsListImporter, IDisposable
     {
         private ContextMenu menu = null;
-        private _Form form=new _Form();
+        private _Form form = new _Form();
         private Point point;
-        private class _MenuItem:MenuItem
+
+        private class _MenuItem : MenuItem
         {
             public string Path;
             public string Group;
-            public _MenuItem(string text,string path, EventHandler onClick)
-                :base(text,onClick)
+            public _MenuItem(string text, string path, EventHandler onClick)
+                : base(text, onClick)
             {
                 this.Path = path;
                 Group = null;
             }
-            public _MenuItem(string text, string path,string group, EventHandler onClick)
+            public _MenuItem(string text, string path, string group, EventHandler onClick)
                 : base(text, onClick)
             {
                 this.Path = path;
                 this.Group = group;
             }
         }
+
         private class _Form : Form
-        { 
+        {
             public _Form()
             {
                 Opacity = 0.01;
@@ -140,28 +142,29 @@ namespace HotKeys
                 TopMost = true;
             }
         }
+
         private void BuildMenu()
         {
             App app;
             AppsGroup apps;
             menu = new ContextMenu();
             _MenuItem item;
-            foreach(Object obj in sections)
+            foreach (Object obj in sections)
             {
                 //them 1 application vao menu
                 app = obj as App;
-                if(app!=null)
+                if (app != null)
                 {
-                    menu.MenuItems.Add(new _MenuItem(app.Name,app.Path,MenuItemClick));
+                    menu.MenuItems.Add(new _MenuItem(app.Name, app.Path, MenuItemClick));
                     continue;
                 }
                 //them 1 applications group vao menu
                 apps = obj as AppsGroup;
-                item = new _MenuItem(apps.Name, null, apps.Name,MenuItemClick);
+                item = new _MenuItem(apps.Name, null, apps.Name, MenuItemClick);
                 //them cac applications vao group menu do
-                foreach(App a in apps.Apps)
+                foreach (App a in apps.Apps)
                 {
-                    item.MenuItems.Add(new _MenuItem(a.Name, a.Path,apps.Name, MenuItemClick));
+                    item.MenuItems.Add(new _MenuItem(a.Name, a.Path, apps.Name, MenuItemClick));
                 }
                 menu.MenuItems.Add(item);
             }
@@ -169,13 +172,14 @@ namespace HotKeys
             WinAPI.GetWindowRect(new HandleRef(form, menu.Handle), out rect);
             point = new Point(0, Screen.PrimaryScreen.Bounds.Bottom - rect.Top + rect.Bottom);
         }
-        private void MenuItemClick(object sender,EventArgs e)
+
+        private void MenuItemClick(object sender, EventArgs e)
         {
             _MenuItem item = sender as _MenuItem;
             if (item == null) return;
-            if(!File.Exists(item.Path))
+            if (!File.Exists(item.Path))
             {
-                MessageBox.Show(string.Format("'{0}' not found!", item.Name), 
+                MessageBox.Show(string.Format("'{0}' not found!", item.Name),
                     Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
@@ -185,10 +189,11 @@ namespace HotKeys
             }
             catch (System.Exception ex)
             {
-                MessageBox.Show(ex.Message,Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            
+
         }
+
         public void Dispose()
         {
             if (menu != null)
@@ -196,20 +201,22 @@ namespace HotKeys
                 menu.Dispose();
                 menu = null;
             }
-            if(form!=null)
+            if (form != null)
             {
                 form.Dispose();
                 form = null;
             }
         }
+
         public void Show()
         {
             form.Show();
             form.Location = point;
-            menu.Show(form,point);
+            menu.Show(form, point);
             form.Hide();
         }
-        public ToolsList(string path):base(path)
+
+        public ToolsList(string path) : base(path)
         {
             ImportINI();
             BuildMenu();

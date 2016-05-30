@@ -29,9 +29,9 @@ namespace HotKeys.Forms
         private void chkTaskbar_CheckedChanged(object sender, System.EventArgs e)
         {
             if (chkTaskbar.Checked)
-                Tasks._tasks.ShowInTaskbar();
+                Tasks.ShowInTaskbar();
             else
-                Tasks._tasks.HideInTaskbar();
+                Tasks.HideInTaskbar();
             Properties.Settings.Default["ShowInTaskbar"] = chkTaskbar.Checked;
             Properties.Settings.Default.Save();
         }
