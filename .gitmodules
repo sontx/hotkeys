@@ -1,0 +1,3 @@
+[submodule "inilib"]
+	path = inilib
+	url = ../inilib.git
